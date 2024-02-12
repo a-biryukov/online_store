@@ -61,3 +61,5 @@ class Product(Base):
         self.quantity = quantity
 
         Product.number_of_products += 1
+
+
