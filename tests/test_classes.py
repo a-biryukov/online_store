@@ -1,5 +1,5 @@
 import pytest
-from src.classes import Category
+from src.classes import Category, Product
 
 
 @pytest.fixture()
@@ -15,7 +15,7 @@ def product_iphone():
 def test_init_category(category_smartphone):
     assert category_smartphone.name == "Смартфоны"
     assert category_smartphone.description == "Многофунциональное устройство"
-    assert category_smartphone.goods == ["Samsung", "IPhane", "Xiaomi"]
+    assert category_smartphone.products == ["Samsung", "IPhone", "Xiaomi"]
 
 
 def test_init_product(product_iphone):
