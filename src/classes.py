@@ -60,4 +60,4 @@ class Product(Base):
         self.price = price
         self.quantity = quantity
 
-        Product.number_of_products += 0
+        Product.number_of_products += 1

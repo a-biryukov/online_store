@@ -1,15 +1,4 @@
-import pytest
 from src.classes import Category, Product
-
-
-@pytest.fixture()
-def category_smartphone():
-    return Category("Смартфоны", "Многофунциональное устройство", ["Samsung", "IPhone", "Xiaomi"])
-
-
-@pytest.fixture()
-def product_iphone():
-    return Product("IPone", "512GB, Gray space", 210000.0, 8)
 
 
 def test_init_category(category_smartphone):
@@ -23,3 +12,11 @@ def test_init_product(product_iphone):
     assert product_iphone.description == "512GB, Gray space"
     assert product_iphone.price == 210000.0
     assert product_iphone.quantity == 8
+
+
+def test_number_of_categories(category_smartphone):
+    assert Category.number_of_categories == 1
+
+
+def test_number_of_products(product_iphone):
+    assert Product.number_of_products == 1
