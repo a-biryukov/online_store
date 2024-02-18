@@ -1,20 +1,4 @@
-class Base:
-    """Базовый класс для наследования"""
-
-    name: str
-    description: str
-
-    def __init__(self, name, description) -> None:
-        """
-        Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра.
-        :param name: Название
-        :param description: Описание
-        """
-        self.name = name
-        self.description = description
-
-
-class Category(Base):
+class Category:
     """Класс для представления категорий товаров"""
 
     # Переменная для подсчета количества категорий товаров
@@ -31,13 +15,14 @@ class Category(Base):
         :param description: Описание категории товаров
         :param products: Список товаров
         """
-        super().__init__(name, description)
+        self.name = name
+        self.description = description
         self.products = products
 
         Category.number_of_categories += 1
 
 
-class Product(Base):
+class Product:
     """Класс для представления товаров"""
 
     # Переменная для подсчета количества уникальных товаров
@@ -56,10 +41,9 @@ class Product(Base):
         :param price: Цена товара
         :param quantity: Количество данного товара на складе
         """
-        super().__init__(name, description)
+        self.name = name
+        self.description = description
         self.price = price
         self.quantity = quantity
 
         Product.number_of_products += 1
-
-
