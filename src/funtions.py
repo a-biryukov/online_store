@@ -29,7 +29,3 @@ def get_class_objects(class_name: str) -> list:
                     class_objects.append(product)
 
     return class_objects
-
-
-
-
