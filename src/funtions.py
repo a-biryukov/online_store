@@ -31,16 +31,5 @@ def get_class_objects(class_name: str) -> list:
     return class_objects
 
 
-category_lst = get_class_objects("Category")
-prod_lst = get_class_objects("Product")
-
-cat1 = category_lst[0]
-cat2 = category_lst[1]
-
-prod1 = prod_lst[0]
-prod2 = prod_lst[1]
-prod3 = prod_lst[2]
-prod4 = prod_lst[3]
-
 
 
