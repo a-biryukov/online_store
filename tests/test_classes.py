@@ -11,13 +11,13 @@ def test_number_of_categories(category_smartphones):
 
 
 def test_number_of_products(category_smartphones):
-    assert Category.number_of_products == 1
+    assert Category.number_of_products == 2
 
 
 def test_add_product(product_samsung, category_smartphones):
-    assert Category.number_of_products == 1
-    category_smartphones.add_product(product_samsung)
     assert Category.number_of_products == 2
+    category_smartphones.add_product(product_samsung)
+    assert Category.number_of_products == 3
 
 
 def test_init_product(product_samsung):
@@ -37,3 +37,15 @@ def test_price(product_samsung):
     assert product_samsung.price is None
 
 
+def test_str(category_smartphones, product_samsung):
+    assert str(category_smartphones) == "Смартфоны, количество товаров: 13 шт."
+    assert str(product_samsung) == "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт."
+
+
+def test_len(category_smartphones, product_samsung):
+    assert len(category_smartphones) == 13
+    assert len(product_samsung) == 5
+
+
+def test_add(product_samsung, product_iphone):
+    assert product_iphone + product_samsung == 2580000.0

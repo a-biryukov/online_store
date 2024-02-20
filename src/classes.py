@@ -22,6 +22,24 @@ class Category:
         Category.number_of_categories += 1
         Category.number_of_products += len(self.__products)
 
+    def __str__(self):
+        """
+        Возвращает строку в формате: Название категории, количество товаров: X шт.
+        """
+        return f"{self.name}, количество товаров: {self.__len__()} шт."
+
+    def __len__(self):
+        """
+        :return: Количество товаров в данной категории
+        """
+        total_products = 0
+
+        for product in self.__products:
+            quantity = product.get("quantity")
+            total_products += quantity
+
+        return total_products
+
     def add_product(self, product) -> None:
         """
         Добавляет объект товара в список
@@ -73,6 +91,26 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
+    def __str__(self):
+        """
+        Возвращает строку в формате: Название продукта, X руб. Остаток: Y шт.
+        """
+        return f"{self.name}, {self.__price} руб. Остаток: {self.__len__()} шт."
+
+    def __len__(self):
+        """
+        :return: Количество данного товара на складе
+        """
+        return self.quantity
+
+    def __add__(self, other):
+        """
+        Складывает цены двух товаров и умножает на количество этих товаров на складе
+        :param other: Объект класса Product
+        :return: Сумма сложенных товаров с учетом их количества на складе
+        """
+        return self.price * self.quantity + other.price * other.quantity
+
     @property
     def price(self) -> float:
         """Геттер для получения цены товара"""
@@ -111,6 +149,6 @@ class Product:
         name = input("Введите название товара: ")
         description = input("Введите описание товара: ")
         price = float(input("Введите цену товара: "))
-        quantity = float(input("Введите количество товара: "))
+        quantity = int(input("Введите количество товара: "))
 
         return cls(name, description, price, quantity)

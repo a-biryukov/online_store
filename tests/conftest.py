@@ -5,12 +5,20 @@ from src.classes import Category, Product
 CATEGORY = {
     "name": "Смартфоны",
     "description": "Многофункциональное устройство",
-    "products": [{
+    "products": [
+      {
         "name": "Samsung Galaxy C23 Ultra",
         "description": "256GB, Серый цвет, 200MP камера",
         "price": 180000.0,
         "quantity": 5
-      }]
+      },
+      {
+        "name": "Iphone 15",
+        "description": "512GB, Gray space",
+        "price": 210000.0,
+        "quantity": 8
+      }
+      ]
     }
 
 
@@ -26,5 +34,6 @@ def product_samsung():
 
 
 @pytest.fixture()
-def product():
-    return CATEGORY.get("products")[0]
+def product_iphone():
+    prod_2 = CATEGORY.get("products")[1]
+    return Product(prod_2.get("name"), prod_2.get("description"), prod_2.get("price"), prod_2.get("quantity"))
