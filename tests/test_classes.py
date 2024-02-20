@@ -38,7 +38,10 @@ def test_price(product_samsung):
 
 
 def test_str(category_smartphones, product_samsung):
-    assert str(category_smartphones) == "Смартфоны, количество товаров: 1 шт."
+    assert str(category_smartphones) == "Смартфоны, количество товаров: 5 шт."
     assert str(product_samsung) == "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт."
 
 
+def test_len(category_smartphones, product_samsung):
+    assert len(category_smartphones) == 5
+    assert len(product_samsung) == 5
