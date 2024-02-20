@@ -69,6 +69,7 @@ class Category:
         for i in self.__products:
             print(f"{i.get("name")}, {i.get("price")} руб. Остаток: {i.get("quantity")} шт.")
 
+        return self.__products
 
 class Product:
     """Класс для представления товаров"""
@@ -142,7 +143,7 @@ class Product:
         self.__price = None
 
     @classmethod
-    def create_product(cls):
+    def create_product(cls, products: list):
         """
         Создает объект класса Product
         """
@@ -150,5 +151,12 @@ class Product:
         description = input("Введите описание товара: ")
         price = float(input("Введите цену товара: "))
         quantity = int(input("Введите количество товара: "))
+
+        for product in products:
+            if product.get("name") == name:
+                product["price"] = max(product["price"], price)
+                product["quantity"] += quantity
+                print("\nЭтот товар уже есть на складе, количество в списке увеличено, цена выбрана наибольшая")
+                return
 
         return cls(name, description, price, quantity)
