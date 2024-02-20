@@ -149,6 +149,6 @@ class Product:
         name = input("Введите название товара: ")
         description = input("Введите описание товара: ")
         price = float(input("Введите цену товара: "))
-        quantity = float(input("Введите количество товара: "))
+        quantity = int(input("Введите количество товара: "))
 
         return cls(name, description, price, quantity)
