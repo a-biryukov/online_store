@@ -24,9 +24,16 @@ class Category:
 
     def __str__(self):
         """
-        Возвращает строку в формате: Название категории, количество товаров: X шт.
+        :return Информация о Катекории и товарах в формате:
+                Название категории, количество товаров: X шт.
+                    Продукт, X руб. Остаток: Y шт.
         """
-        return f"{self.name}, количество товаров: {self.__len__()} шт."
+        products_str = ""
+
+        for i in self.__products:
+            products_str += f"\n    {i.name}, {i.price} руб. Остаток: {i.quantity} шт."
+
+        return f"""{self.name}, количество товаров: {self.__len__()} шт.{products_str}"""
 
     def __len__(self):
         """
@@ -35,8 +42,7 @@ class Category:
         total_products = 0
 
         for product in self.__products:
-            quantity = product.get("quantity")
-            total_products += quantity
+            total_products += product.quantity
 
         return total_products
 
@@ -46,28 +52,15 @@ class Category:
         :param product: Объескт класса Product
         :return: None
         """
-        name = product.name
-        description = product.description
-        price = product.price
-        quantity = product.quantity
-
-        product = {
-            "name": name,
-            "description": description,
-            "price": price,
-            "quantity": quantity
-        }
-
         self.__products.append(product)
         Category.number_of_products += 1
 
     @property
     def products(self) -> None:
         """
-        Выводит список товаров в формате: Продукт, X руб. Остаток: Y шт.
+        :return Список с объектами класса продукт
         """
-        for i in self.__products:
-            print(f"{i.get("name")}, {i.get("price")} руб. Остаток: {i.get("quantity")} шт.")
+        return self.__products
 
 
 class Product:
@@ -142,7 +135,7 @@ class Product:
         self.__price = None
 
     @classmethod
-    def create_product(cls):
+    def create_product(cls, products: list):
         """
         Создает объект класса Product
         """
@@ -150,5 +143,12 @@ class Product:
         description = input("Введите описание товара: ")
         price = float(input("Введите цену товара: "))
         quantity = int(input("Введите количество товара: "))
+
+        for product in products:
+            if product.name == name:
+                product.price = max(product.price, price)
+                product.quantity += quantity
+                print("\nЭтот товар уже есть на складе, количество в списке увеличено, цена выбрана наибольшая")
+                return
 
         return cls(name, description, price, quantity)

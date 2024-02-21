@@ -2,10 +2,7 @@ import pytest
 from src.classes import Category, Product
 
 
-CATEGORY = {
-    "name": "Смартфоны",
-    "description": "Многофункциональное устройство",
-    "products": [
+PROD =[
       {
         "name": "Samsung Galaxy C23 Ultra",
         "description": "256GB, Серый цвет, 200MP камера",
@@ -19,21 +16,36 @@ CATEGORY = {
         "quantity": 8
       }
       ]
-    }
+
+CAT = {
+    "name": "Смартфоны",
+    "description": "Многофункциональное устройство",
+    "products": [
+        Product(PROD[0].get("name"), PROD[0].get("description"), PROD[0].get("price"), PROD[0].get("quantity")),
+        Product(PROD[1].get("name"), PROD[1].get("description"), PROD[1].get("price"), PROD[1].get("quantity"))
+    ]
+}
+
+PRINT_CAT = """Смартфоны, количество товаров: 13 шт.
+    Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт.
+    Iphone 15, 210000.0 руб. Остаток: 8 шт."""
 
 
 @pytest.fixture()
 def category_smartphones():
-    return Category(CATEGORY.get("name"), CATEGORY.get("description"), CATEGORY.get("products"))
+    return Category(CAT.get("name"), CAT.get("description"), CAT.get("products"))
 
 
 @pytest.fixture()
 def product_samsung():
-    prod_1 = CATEGORY.get("products")[0]
-    return Product(prod_1.get("name"), prod_1.get("description"), prod_1.get("price"), prod_1.get("quantity"))
+    return CAT.get("products")[0]
 
 
 @pytest.fixture()
 def product_iphone():
-    prod_2 = CATEGORY.get("products")[1]
-    return Product(prod_2.get("name"), prod_2.get("description"), prod_2.get("price"), prod_2.get("quantity"))
+    return CAT.get("products")[1]
+
+
+@pytest.fixture()
+def print_category():
+    return PRINT_CAT
