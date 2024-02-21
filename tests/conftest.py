@@ -31,21 +31,21 @@ PRINT_CAT = """Смартфоны, количество товаров: 13 шт.
     Iphone 15, 210000.0 руб. Остаток: 8 шт."""
 
 
-@pytest.fixture()
+@pytest.fixture
 def category_smartphones():
     return Category(CAT.get("name"), CAT.get("description"), CAT.get("products"))
 
 
-@pytest.fixture()
+@pytest.fixture
 def product_samsung():
     return CAT.get("products")[0]
 
 
-@pytest.fixture()
+@pytest.fixture
 def product_iphone():
     return CAT.get("products")[1]
 
 
-@pytest.fixture()
+@pytest.fixture
 def print_category():
     return PRINT_CAT
