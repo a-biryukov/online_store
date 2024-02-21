@@ -37,8 +37,8 @@ def test_price(product_samsung):
     assert product_samsung.price is None
 
 
-def test_str(category_smartphones, product_samsung):
-    assert str(category_smartphones) == "Смартфоны, количество товаров: 13 шт."
+def test_str(category_smartphones, product_samsung, print_category):
+    assert str(category_smartphones) == print_category
     assert str(product_samsung) == "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт."
 
 

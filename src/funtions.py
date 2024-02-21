@@ -3,11 +3,11 @@ import json
 import os
 
 
-def get_class_objects(class_name: str) -> list:
+def get_class_objects() -> list:
     """
-    Загружает из файла список с данными и возвращает список с объектами класса
-    :param class_name: Строка с названием класса
-    :return: Список с объектами класса
+    Загружает из файла список с данными, создаёт объекты классов Category и Products.
+    Помещает список с объектами класса Product в атрибут products класса Category.
+    :return: Список с объектами класса Category
     """
     current_file_path = os.path.abspath(__file__)
     parent_dir_path = os.path.dirname(os.path.dirname(current_file_path))
@@ -16,16 +16,16 @@ def get_class_objects(class_name: str) -> list:
     with open(file_path, encoding="utf-8") as file:
         data = json.load(file)
 
-        class_objects = []
+        category_objects = []
 
         for item in data:
-            if class_name == "Category":
-                category = Category(item.get("name"), item.get("description"), item.get("products"))
-                class_objects.append(category)
-            elif class_name == "Product":
-                products = item.get("products")
-                for i in products:
-                    product = Product(i.get("name"), i.get("description"), i.get("price"), i.get("quantity"))
-                    class_objects.append(product)
+            products_objects = []
+            products = item.get("products")
+            for i in products:
+                product = Product(i.get("name"), i.get("description"), i.get("price"), i.get("quantity"))
+                products_objects.append(product)
 
-    return class_objects
+            category = Category(item.get("name"), item.get("description"), products_objects)
+            category_objects.append(category)
+
+    return category_objects
