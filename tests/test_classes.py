@@ -74,9 +74,3 @@ def test_create_product(category_smartphones):
     Product.create_product("Iphone 15", "512GB, Gray space", 300000.0, 2, category_smartphones.products)
     assert category_smartphones.products[1].price == 300000.0
     assert category_smartphones.products[1].quantity == 10
-
-
-
-
-
-
