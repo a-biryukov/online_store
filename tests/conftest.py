@@ -2,7 +2,7 @@ import pytest
 from src.classes import Category, Product
 
 
-PROD =[
+PROD = [
       {
         "name": "Samsung Galaxy C23 Ultra",
         "description": "256GB, Серый цвет, 200MP камера",
