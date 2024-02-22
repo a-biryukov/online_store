@@ -33,16 +33,20 @@ PRINT_CAT = """Смартфоны, количество товаров: 13 шт.
 
 @pytest.fixture
 def category_smartphones():
+    Category.number_of_categories = 0
+    Category.number_of_products = 0
     return Category(CAT.get("name"), CAT.get("description"), CAT.get("products"))
 
 
 @pytest.fixture
 def product_samsung():
+    Category.number_of_products = 0
     return CAT.get("products")[0]
 
 
 @pytest.fixture
 def product_iphone():
+    Category.number_of_products = 0
     return CAT.get("products")[1]
 
 
