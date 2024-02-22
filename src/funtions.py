@@ -1,4 +1,4 @@
-from classes import Category, Product
+from src.classes import Category, Product
 import json
 import os
 

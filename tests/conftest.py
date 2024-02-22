@@ -2,7 +2,7 @@ import pytest
 from src.classes import Category, Product
 
 
-PROD =[
+PROD = [
       {
         "name": "Samsung Galaxy C23 Ultra",
         "description": "256GB, Серый цвет, 200MP камера",
@@ -31,21 +31,41 @@ PRINT_CAT = """Смартфоны, количество товаров: 13 шт.
     Iphone 15, 210000.0 руб. Остаток: 8 шт."""
 
 
-@pytest.fixture()
+@pytest.fixture
 def category_smartphones():
+    """
+    Фикстура которая возвращает объект класса Category
+    Предварительно обнуляет количество категорий и продуктов для запуска всех тестов одновременно
+    """
+    Category.number_of_categories = 0
+    Category.number_of_products = 0
     return Category(CAT.get("name"), CAT.get("description"), CAT.get("products"))
 
 
-@pytest.fixture()
+@pytest.fixture
 def product_samsung():
+    """
+    Фикстура которая возвращает объект класса Product
+    Предварительно обнуляет количество продуктов для запуска всех тестов одновременно
+    """
+    Category.number_of_products = 0
     return CAT.get("products")[0]
 
 
-@pytest.fixture()
+@pytest.fixture
 def product_iphone():
+    """
+    Фикстура которая возвращает объект класса Product
+    Предварительно обнуляет количество продуктов для запуска всех тестов одновременно
+    """
+    Category.number_of_products = 0
     return CAT.get("products")[1]
 
 
-@pytest.fixture()
+@pytest.fixture
 def print_category():
+    """
+    Фикстура для проверки метода str класса Category
+    :return: Строку с информацией о категории и продуктах
+    """
     return PRINT_CAT
