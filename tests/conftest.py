@@ -33,6 +33,10 @@ PRINT_CAT = """Смартфоны, количество товаров: 13 шт.
 
 @pytest.fixture
 def category_smartphones():
+    """
+    Фикстура которая возвращает объект класса Category
+    Предварительно обнуляет количество категорий и продуктов для запуска всех тестов одновременно
+    """
     Category.number_of_categories = 0
     Category.number_of_products = 0
     return Category(CAT.get("name"), CAT.get("description"), CAT.get("products"))
@@ -40,16 +44,28 @@ def category_smartphones():
 
 @pytest.fixture
 def product_samsung():
+    """
+    Фикстура которая возвращает объект класса Product
+    Предварительно обнуляет количество продуктов для запуска всех тестов одновременно
+    """
     Category.number_of_products = 0
     return CAT.get("products")[0]
 
 
 @pytest.fixture
 def product_iphone():
+    """
+    Фикстура которая возвращает объект класса Product
+    Предварительно обнуляет количество продуктов для запуска всех тестов одновременно
+    """
     Category.number_of_products = 0
     return CAT.get("products")[1]
 
 
 @pytest.fixture
 def print_category():
+    """
+    Фикстура для проверки метода str класса Category
+    :return: Строку с информацией о категории и продуктах
+    """
     return PRINT_CAT
