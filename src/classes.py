@@ -28,18 +28,12 @@ class Category:
                 Название категории, количество товаров: X шт.
                     Продукт, X руб. Остаток: Y шт.
         """
-        products_str = ""
-
-        for i in self.__products:
-            products_str += f"\n    {i.name}, {i.price} руб. Остаток: {i.quantity} шт."
-
-        return f"""{self.name}, количество товаров: {self.__len__()} шт.{products_str}"""
+        return f"""{self.name}, количество товаров: {len(self)} шт."""
 
     def __len__(self) -> int:
         """
         :return: Количество товаров в категории
         """
-
         return sum([product.quantity for product in self.__products])
 
     def add_product(self, product) -> None:
@@ -84,7 +78,7 @@ class Product:
         """
         Возвращает строку в формате: Название продукта, X руб. Остаток: Y шт.
         """
-        return f"{self.name}, {self.__price} руб. Остаток: {self.__len__()} шт."
+        return f"{self.name}, {self.__price} руб. Остаток: {len(self)} шт."
 
     def __len__(self) -> int:
         """
