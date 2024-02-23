@@ -39,12 +39,8 @@ class Category:
         """
         :return: Количество товаров в категории
         """
-        total_products = 0
 
-        for product in self.__products:
-            total_products += product.quantity
-
-        return total_products
+        return sum([product.quantity for product in self.__products])
 
     def add_product(self, product) -> None:
         """
