@@ -64,7 +64,7 @@ def test_iter_category(category_smartphones):
 
 
 def test_add_product(product_samsung, category_smartphones):
-    """Тест на добавление объекта класса Product в список товаров объекта класса Category"""
+    """ Тест на добавление объекта класса Product в список товаров объекта класса Category """
     assert Category.number_of_products == 2
     assert len(category_smartphones) == 13
     category_smartphones.add_product(product_samsung)
@@ -75,10 +75,7 @@ def test_add_product(product_samsung, category_smartphones):
 
 
 def test_create_product(category_smartphones, product_samsung):
-    """
-    Тест на обновление цены и количества товара при его создании,
-    если этот товар уже есть в списке объектов класса Product
-    """
+    """ Тест метода create_product класса Product """
     assert category_smartphones.products[1].price == 210000.0
     assert category_smartphones.products[1].quantity == 8
     Product.create_product("Iphone 15", "512GB, Gray space", 300000.0, 2, category_smartphones)
