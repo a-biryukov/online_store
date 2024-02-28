@@ -1,4 +1,5 @@
 from src.classes import Category, Product, IterProducts
+import pytest
 
 
 def test_init_category(category_smartphones, product_samsung, product_iphone):
@@ -39,9 +40,11 @@ def test_products(category_smartphones, product_iphone, product_samsung):
     assert category_smartphones.products == [product_samsung, product_iphone]
 
 
-def test_add(product_samsung, product_iphone):
+def test_add(product_samsung, product_iphone, category_smartphones):
     """Тест метода add класса Product"""
     assert product_iphone + product_samsung == 2580000.0
+    with pytest.raises(TypeError):
+        assert product_samsung + category_smartphones
 
 
 def test_price(product_samsung):
@@ -67,9 +70,11 @@ def test_add_product(product_samsung, category_smartphones):
     category_smartphones.add_product(product_samsung)
     assert Category.number_of_products == 3
     assert len(category_smartphones) == 18
+    with pytest.raises(TypeError):
+        assert category_smartphones.add_product(category_smartphones)
 
 
-def test_create_product(category_smartphones):
+def test_create_product(category_smartphones, product_samsung):
     """
     Тест на обновление цены и количества товара при его создании,
     если этот товар уже есть в списке объектов класса Product
@@ -79,3 +84,4 @@ def test_create_product(category_smartphones):
     Product.create_product("Iphone 15", "512GB, Gray space", 300000.0, 2, category_smartphones)
     assert category_smartphones.products[1].price == 300000.0
     assert category_smartphones.products[1].quantity == 10
+    assert type(Product.create_product("TV", "TV", 100, 5, category_smartphones)) == type(product_samsung)
