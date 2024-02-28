@@ -5,8 +5,8 @@ import os
 
 def get_class_objects() -> list:
     """
-    Загружает из файла список с данными, создаёт объекты классов Category и Products.
-    Помещает список с объектами класса Product в атрибут products класса Category.
+    Загружает из файла список с данными, создаёт объекты классов Category, Products.
+    Помещает список с объектами классов Product в атрибут products класса Category.
     :return: Список с объектами класса Category
     """
     current_file_path = os.path.abspath(__file__)
@@ -20,12 +20,14 @@ def get_class_objects() -> list:
 
         for item in data:
             products_objects = []
+
             products = item.get("products")
+
             for i in products:
                 product = Product(i.get("name"), i.get("description"), i.get("price"), i.get("quantity"))
                 products_objects.append(product)
 
-            category = Category(item.get("name"), item.get("description"), products_objects)
-            category_objects.append(category)
+            category_ = Category(item.get("name"), item.get("description"), products_objects)
+            category_objects.append(category_)
 
     return category_objects

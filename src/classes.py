@@ -39,9 +39,12 @@ class Category:
     def add_product(self, product) -> None:
         """
         Добавляет объект товара в список
-        :param product: Объескт класса Product
+        :param product: Объескт класса Product или его наследников
         :return: None
         """
+        if not isinstance(product, Product):
+            raise TypeError
+
         self.__products.append(product)
         Category.number_of_products += 1
 
@@ -60,19 +63,22 @@ class Product:
     description: str
     price: float
     quantity: int
+    color: str
 
-    def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
+    def __init__(self, name: str, description: str, price: float, quantity: int, color=None) -> None:
         """
         Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра.
         :param name: Название товара
         :param description: Описание товара
         :param price: Цена товара
         :param quantity: Количество данного товара на складе
+        :param color: Цвет товара
         """
         self.name = name
         self.description = description
         self.__price = price
         self.quantity = quantity
+        self.color = color
 
     def __str__(self) -> str:
         """
@@ -88,10 +94,13 @@ class Product:
 
     def __add__(self, other) -> float:
         """
-        Складывает цены двух товаров и умножает на количество этих товаров на складе
-        :param other: Объект класса Product
-        :return: Сумма сложенных товаров с учетом их количества на складе
+        Складывает объекты одного класса
+        :param other: Объект класса
+        :return: Сумма сложенных цен товаров с учетом их количества на складе
         """
+        if type(self) is not type(other):
+            raise TypeError
+
         return self.price * self.quantity + other.price * other.quantity
 
     @property
@@ -169,3 +178,60 @@ class IterProducts:
             return self.category.products[self.current_value]
         else:
             raise StopIteration
+
+
+class Smartphone(Product):
+    """ Класс для представления смартфонов """
+
+    name: str
+    description: str
+    price: float
+    quantity: int
+    color: str
+    performance: float
+    model: str
+    memory: int
+
+    def __init__(self, name: str, description: str, price: float, quantity: int, color: str, performance: float, model: str, memory: int) -> None:
+        """
+        Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра.
+        :param name: Название товара
+        :param description: Описание товара
+        :param price: Цена товара
+        :param quantity: Количествотовара на складе
+        :param performance: Производительность
+        :param model: Модель
+        :param memory: Объем встроенной памяти
+        :param color: Цвет
+        """
+        super().__init__(name, description, price, quantity, color)
+        self.performance = performance
+        self.model = model
+        self.memory = memory
+
+
+class LawnGrass(Product):
+    """ Класс для представления газонной травы """
+
+    name: str
+    description: str
+    price: float
+    quantity: int
+    country: str
+    germination: int
+    color: str
+
+    def __init__(self, name: str, description: str, price: float, quantity: int, color: str, country: str, germination: int) -> None:
+        """
+        Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра.
+        :param name: Название товара
+        :param description: Описание товара
+        :param price: Цена товара
+        :param quantity: Количествотовара на складе
+        :param country: Страна производитель
+        :param germination: Срок прорастания
+        :param color: Цвет
+        """
+        super().__init__(name, description, price, quantity, color)
+        self.country = country
+        self.germination = germination
