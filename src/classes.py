@@ -1,5 +1,66 @@
-class Category:
-    """Класс для представления категорий товаров"""
+from abc import ABC, abstractmethod
+
+
+class Goods(ABC):
+    """ Абстрактный класс для наследования классами представляющих товары """
+
+    @abstractmethod
+    def __str__(self):
+        """ Метод для получения информации информации о названии, цене и количестве товара """
+        pass
+
+    @abstractmethod
+    def __len__(self):
+        """ Метод получения количества товара на складе """
+        pass
+
+    @abstractmethod
+    def __add__(self, other):
+        """ Метод сложения объектов товаров """
+        pass
+
+    @abstractmethod
+    def price(self):
+        """ Геттер, сеттер и делитер для цены товара """
+        pass
+
+    @classmethod
+    @abstractmethod
+    def create_product(cls, *args):
+        """ Метод создания объекта товара или обновления количества и цены, если товар уже есть на складе """
+        pass
+
+
+class MixinLog:
+    """
+     Миксин, который выводит в консоль информацию при создании объекта в формате:
+        Название класса(свойства класса)
+    """
+    def __init__(self, *args):
+        print(repr(self))
+
+    def __repr__(self) -> str:
+        """
+        :return: Строка с названием класса и свойствах
+        """
+        values_lst = list(self.__dict__.values())
+
+        values_lst_ = []
+        for i in values_lst:
+            if type(i) is str:
+                value = f"'{i}'"
+                values_lst_.append(value)
+            else:
+                value = str(i)
+                values_lst_.append(value)
+
+        value_str = ", ".join(values_lst_)
+
+        return f"{self.__class__.__name__}({value_str})"
+
+
+class Category(MixinLog):
+    """ Класс для представления категорий товаров """
 
     name: str
     description: str
@@ -10,7 +71,7 @@ class Category:
 
     def __init__(self, name: str, description: str, products: list) -> None:
         """
-        Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра.
+        Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра класса.
         :param name: Название категории товаров
         :param description: Описание категории товаров
         :param products: Список товаров
@@ -18,6 +79,7 @@ class Category:
         self.name = name
         self.description = description
         self.__products = products
+        super().__init__()
 
         Category.number_of_categories += 1
         Category.number_of_products += len(self.__products)
@@ -56,8 +118,8 @@ class Category:
         return self.__products
 
 
-class Product:
-    """Класс для представления товаров"""
+class Product(Goods, MixinLog):
+    """ Класс для представления товаров """
 
     name: str
     description: str
@@ -78,6 +140,7 @@ class Product:
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__()
         self.color = color
 
     def __str__(self) -> str:
@@ -130,13 +193,13 @@ class Product:
 
     @price.deleter
     def price(self) -> None:
-        """Ставит цену товара None"""
+        """ Ставит цену товара None """
         self.__price = None
 
     @classmethod
     def create_product(cls, name: str, description: str, price: float, quantity: int, category):
         """
-        Проверяет наличие продукта в списке продуктов,
+        Проверяет наличие товара в списке товаров,
             если он там есть,то добавляет количество и устанавливает максимальную цену,
             если нет, то создает объект класса Product
         :param name: Название товара
@@ -159,7 +222,7 @@ class Product:
 
 
 class IterProducts:
-    """Класс для итерации по списку товаров объекта класса Category"""
+    """ Класс для итерации по списку товаров объекта класса Category """
 
     def __init__(self, category):
         """
@@ -192,7 +255,8 @@ class Smartphone(Product):
     model: str
     memory: int
 
-    def __init__(self, name: str, description: str, price: float, quantity: int, color: str, performance: float, model: str, memory: int) -> None:
+    def __init__(self, name: str, description: str, price: float, quantity: int, color: str,
+                 performance: float, model: str, memory: int) -> None:
         """
         Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра.
         :param name: Название товара
@@ -204,10 +268,11 @@ class Smartphone(Product):
         :param memory: Объем встроенной памяти
         :param color: Цвет
         """
-        super().__init__(name, description, price, quantity, color)
+
         self.performance = performance
         self.model = model
         self.memory = memory
+        super().__init__(name, description, price, quantity, color)
 
 
 class LawnGrass(Product):
@@ -221,7 +286,8 @@ class LawnGrass(Product):
     germination: int
     color: str
 
-    def __init__(self, name: str, description: str, price: float, quantity: int, color: str, country: str, germination: int) -> None:
+    def __init__(self, name: str, description: str, price: float, quantity: int, color: str,
+                 country: str, germination: int) -> None:
         """
         Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра.
         :param name: Название товара
@@ -232,6 +298,6 @@ class LawnGrass(Product):
         :param germination: Срок прорастания
         :param color: Цвет
         """
-        super().__init__(name, description, price, quantity, color)
         self.country = country
         self.germination = germination
+        super().__init__(name, description, price, quantity, color)
