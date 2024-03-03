@@ -267,6 +267,9 @@ class Smartphone(Product):
         :param model: Модель
         :param memory: Объем встроенной памяти
         :param color: Цвет
+        :param performance: производительность
+        :param model: модель
+        :param memory: Объем встроенной памяти
         """
         self.performance = performance
         self.model = model
@@ -321,6 +324,8 @@ class LawnGrass(Product):
         :param country: Страна производитель
         :param germination: Срок прорастания
         :param color: Цвет
+        :param country: Страна производитель
+        :param germination: Срок произрастания
         """
         self.country = country
         self.germination = germination
