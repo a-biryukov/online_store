@@ -268,11 +268,35 @@ class Smartphone(Product):
         :param memory: Объем встроенной памяти
         :param color: Цвет
         """
-
         self.performance = performance
         self.model = model
         self.memory = memory
         super().__init__(name, description, price, quantity, color)
+
+    @classmethod
+    def create_product(cls, name: str, description: str, price: float, quantity: int, color: str,
+                       performance: float, model: str, memory: int, category):
+        """
+        Проверяет наличие товара в списке товаров,
+            если он там есть,то добавляет количество и устанавливает максимальную цену,
+            если нет, то создает объект класса Product
+        :param name: Название товара
+        :param description: Описание товара
+        :param price: Цена товара
+        :param quantity: Количество товара
+        :param category: Объект класса Category
+        :return: Объект класса Product или обновляет количество товара и цену в списке
+        """
+        products = category.products
+
+        for product in products:
+            if product.name == name:
+                product.price = max(product.price, price)
+                product.quantity += quantity
+                print("\nЭтот товар уже есть на складе, количество в списке увеличено, цена выбрана наибольшая")
+                return
+
+        return cls(name, description, price, quantity, color, performance, model, memory)
 
 
 class LawnGrass(Product):
@@ -301,3 +325,28 @@ class LawnGrass(Product):
         self.country = country
         self.germination = germination
         super().__init__(name, description, price, quantity, color)
+
+    @classmethod
+    def create_product(cls, name: str, description: str, price: float, quantity: int, color: str,
+                       country: str, germination: int, category):
+        """
+        Проверяет наличие товара в списке товаров,
+            если он там есть,то добавляет количество и устанавливает максимальную цену,
+            если нет, то создает объект класса Product
+        :param name: Название товара
+        :param description: Описание товара
+        :param price: Цена товара
+        :param quantity: Количество товара
+        :param category: Объект класса Category
+        :return: Объект класса Product или обновляет количество товара и цену в списке
+        """
+        products = category.products
+
+        for product in products:
+            if product.name == name:
+                product.price = max(product.price, price)
+                product.quantity += quantity
+                print("\nЭтот товар уже есть на складе, количество в списке увеличено, цена выбрана наибольшая")
+                return
+
+        return cls(name, description, price, quantity, color, country, germination)
