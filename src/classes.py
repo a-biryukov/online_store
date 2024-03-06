@@ -287,6 +287,9 @@ class Smartphone(Product):
         :param description: Описание товара
         :param price: Цена товара
         :param quantity: Количество товара
+        :param performance: Производительность
+        :param model: Модель телефона
+        :param memory: Объем встроенной памяти
         :param category: Объект класса Category
         :return: Объект класса Smartphone или обновляет количество товара и цену в списке
         """
