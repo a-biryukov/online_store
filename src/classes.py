@@ -263,12 +263,9 @@ class Smartphone(Product):
         :param description: Описание товара
         :param price: Цена товара
         :param quantity: Количествотовара на складе
+        :param color: Цвет товара
         :param performance: Производительность
         :param model: Модель
-        :param memory: Объем встроенной памяти
-        :param color: Цвет
-        :param performance: производительность
-        :param model: модель
         :param memory: Объем встроенной памяти
         """
         self.performance = performance
@@ -282,13 +279,14 @@ class Smartphone(Product):
         """
         Проверяет наличие товара в списке товаров,
             если он там есть,то добавляет количество и устанавливает максимальную цену,
-            если нет, то создает объект класса Product
+            если нет, то создает объект класса Smartphone
         :param name: Название товара
         :param description: Описание товара
         :param price: Цена товара
         :param quantity: Количество товара
+        :param color: Цвет товара
         :param performance: Производительность
-        :param model: Модель телефона
+        :param model: Модель
         :param memory: Объем встроенной памяти
         :param category: Объект класса Category
         :return: Объект класса Smartphone или обновляет количество товара и цену в списке
@@ -325,8 +323,8 @@ class LawnGrass(Product):
         :param price: Цена товара
         :param quantity: Количествотовара на складе
         :param country: Страна производитель
-        :param germination: Срок прорастания
         :param color: Цвет
+        :param germination: Срок прорастания
         :param country: Страна производитель
         :param germination: Срок произрастания
         """
@@ -340,11 +338,15 @@ class LawnGrass(Product):
         """
         Проверяет наличие товара в списке товаров,
             если он там есть,то добавляет количество и устанавливает максимальную цену,
-            если нет, то создает объект класса Product
+            если нет, то создает объект класса LawnGrass
         :param name: Название товара
         :param description: Описание товара
         :param price: Цена товара
         :param quantity: Количество товара
+        :param color: Цвет товара
+        :param germination: Срок прорастания
+        :param country: Страна производитель
+        :param germination: Срок произрастания
         :param category: Объект класса Category
         :return: Объект класса LawnGrass или обновляет количество товара и цену в списке
         """
