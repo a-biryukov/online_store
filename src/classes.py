@@ -288,7 +288,7 @@ class Smartphone(Product):
         :param price: Цена товара
         :param quantity: Количество товара
         :param category: Объект класса Category
-        :return: Объект класса Product или обновляет количество товара и цену в списке
+        :return: Объект класса Smartphone или обновляет количество товара и цену в списке
         """
         products = category.products
 
@@ -343,7 +343,7 @@ class LawnGrass(Product):
         :param price: Цена товара
         :param quantity: Количество товара
         :param category: Объект класса Category
-        :return: Объект класса Product или обновляет количество товара и цену в списке
+        :return: Объект класса LawnGrass или обновляет количество товара и цену в списке
         """
         products = category.products
 
