@@ -1,6 +1,8 @@
-from src.classes import Category, Product
 import json
 import os
+
+from src.classes_products import Product
+from src.class_category import Category
 
 
 def get_class_objects() -> list:
