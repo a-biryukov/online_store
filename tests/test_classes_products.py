@@ -17,7 +17,7 @@ def test_str(category_smartphones, product_samsung, print_category):
 
 
 def test_len(product_samsung):
-    """Тест метода str класса Product"""
+    """Тест метода len класса Product"""
     assert len(product_samsung) == 5
 
 
