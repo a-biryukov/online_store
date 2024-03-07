@@ -69,6 +69,7 @@ class Category(MixinLog):
         :return: Средняя цена на товар в категории
         """
         total_cost = sum([product.price for product in self.__products])
+
         try:
             average_cost = total_cost / len(self.__products)
         except ZeroDivisionError:
