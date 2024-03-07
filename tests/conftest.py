@@ -1,5 +1,7 @@
 import pytest
-from src.classes import Category, Product
+
+from src.classes_products import Product
+from src.class_category import Category
 
 
 PROD = [
