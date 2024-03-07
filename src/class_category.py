@@ -63,16 +63,17 @@ class Category(MixinLog):
         """
         return self.__products
 
-    def get_average_cost(self):
+    def get_average_price(self):
         """
         Считает среднюю цену всех товаров в списке продуктов, если список продуктов пустой - возвращает 0
         :return: Средняя цена на товар в категории
         """
-        total_cost = sum([product.price for product in self.__products])
+        total_price = sum([product.price * product.quantity for product in self.__products])
+        total_products = len(self)
 
         try:
-            average_cost = total_cost / len(self.__products)
+            average_price = total_price / total_products
         except ZeroDivisionError:
             return 0
         else:
-            return round(average_cost, 2)
+            return round(average_price, 2)
