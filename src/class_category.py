@@ -1,5 +1,4 @@
 from src.classes import MixinLog
-
 from src.classes_products import Product
 
 
