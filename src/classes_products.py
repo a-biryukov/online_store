@@ -124,6 +124,9 @@ class Product(Goods, MixinLog):
         :param category: Объект класса Category
         :return: Объект класса Product или обновляет количество товара и цену в списке
         """
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
+
         products = category.products
 
         for product in products:
@@ -184,6 +187,9 @@ class Smartphone(Product):
         :param category: Объект класса Category
         :return: Объект класса Smartphone или обновляет количество товара и цену в списке
         """
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
+
         products = category.products
 
         for product in products:
@@ -243,6 +249,9 @@ class LawnGrass(Product):
         :param category: Объект класса Category
         :return: Объект класса LawnGrass или обновляет количество товара и цену в списке
         """
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
+
         products = category.products
 
         for product in products:
